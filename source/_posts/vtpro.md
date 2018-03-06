@@ -1,7 +1,7 @@
 ---
 title: Vue+tp5简单列表操作
 date: 2018-03-06 23:58:36
-tags:
+tags: Vue
 ---
 前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。
 这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。
@@ -91,127 +91,124 @@ API_HOST:'"http://127.0.0.1/tp5/"'
 </template>
 
 <script>
-    export default {
-        name:"TODOList"
-        data () {
-            return {
-                //姓名
-                nickname:"",
-                //年龄
-                age:"",
-                //age是数字
-                isAge:true,
-                list: [
-
-               ],
+export default {
+    name:"TODOList"
+    data () {
+        return {
+            //姓名
+            nickname:"",
+            //年龄
+            age:"",
+            //age是数字
+            isAge:true,
+            list: [],
+        }
+    },
+    created(){
+        this.getList()
+    },
+    methods:{
+        /**
+        * 获取列表数据
+        */
+        getList: function () {
+            let $this = this;
+            this.$axios.get(process.env.API_HOST)
+            .then(function(response){
+            $this.list = response.data;
+            console.log(response.data);
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
+        },
+        /**
+        * 新增列表数据
+        */
+        addList:function(){
+            let $this = this;
+            if(!this.isAge){
+                return false;
+            }
+            if($this.nickname && $this.age){
+                $this.$axios.get(process.env.API_HOST + 'index/index/addList',{
+                    params: {
+                        nickname: $this.nickname,
+                        age: $this.age
+                    }
+                }).then(function (response) {
+                    console.log(response.data);
+                    $this.list.push({
+                        nickname:response.data.nickname,
+                        age:response.data.age
+                    });
+                }).catch(function (error) {
+                    console.log(error);
+                });
             }
         },
-        created(){
-         this.getList()
-        },
-        methods:{
-             /**
-             * 获取列表数据
-             */
-             getList: function () {
-                let $this = this;
-                this.$axios.get(process.env.API_HOST)
-                .then(function(response){
-                $this.list = response.data;
-                console.log(response.data);
-                })
-                .catch(function (error) {
-                console.log(error);
-                });
-            },
-            /**
-             * 新增列表数据
-             */
-            addList:function(){
-                let $this = this;
-                if(!this.isAge){
-                    return false;
-                }
-                if($this.nickname && $this.age){
-                    $this.$axios.get(process.env.API_HOST + 'index/index/addList',{
-                        params: {
-                            nickname: $this.nickname,
-                            age: $this.age
-                        }
-                    }).then(function (response) {
-                        console.log(response.data);
-                        $this.list.push({
-                            nickname:response.data.nickname,
-                            age:response.data.age
-                        });
+        /**
+        * 删除列表数据
+        * @param index  list键值
+        */
+        delList:function(index){
+            let $this = this;
+            if(confirm('确定要删除吗')){
+                if($this.list[index] != undefined){
+                    $this.$axios.post(process.env.API_HOST + 'index/index/delList',{
+                            nickname: $this.list[index].nickname
+                        }).then(function (response) {
+                            if(response.data=='操作成功'){
+                                $this.list.splice(index,1);
+                            }
                     }).catch(function (error) {
                         console.log(error);
                     });
-
                 }
-            },
-            /**
-             * 删除列表数据
-             * @param index  list键值
-             */
-            delList:function(index){
-                let $this = this;
-                if(confirm('确定要删除吗')){
-                    if($this.list[index] != undefined){
-                        $this.$axios.post(process.env.API_HOST + 'index/index/delList',{
-                                nickname: $this.list[index].nickname
-                            }).then(function (response) {
-                                if(response.data=='操作成功'){
-                                     $this.list.splice(index,1);
-                                }
-                        }).catch(function (error) {
-                            console.log(error);
+            }
+        },
+        /**
+        * 清空或还原列表数据
+        */
+        controlList:function(){
+            if(confirm('确定要执行此操作吗')){
+                this.$axios.post(process.env.API_HOST + 'index/index/controlList').then(response=>{
+                    if(response.data==''){
+                        this.list.splice(0,this.list.length);
+                    }else{
+                        for (var i in response.data) {
+                            this.list.push({
+                            nickname:response.data[i].nickname,
+                            age:response.data[i].age
                         });
-                    }
-                }
-            },
-            /**
-             * 清空或还原列表数据
-             */
-            controlList:function(){
-                if(confirm('确定要执行此操作吗')){
-                    this.$axios.post(process.env.API_HOST + 'index/index/controlList').then(response=>{
-                        if(response.data==''){
-                           this.list.splice(0,this.list.length);
-                        }else{
-                           for (var i in response.data) {
-                             this.list.push({
-                             nickname:response.data[i].nickname,
-                             age:response.data[i].age
-                            });
-                           }
                         }
-                        }).catch(function (error) {
-                            console.log(error);
-                        });;
-                }
-            },
-            detail:function(index){
-                this.$router.push({path:'/detail',query: {nickname: this.list[index].nickname}})
-            },
-            /**
-             * 初始化输入
-             */
-            init:function(){
-                this.nickname = "";
-                this.age = "";
-                this.isAge = true;
-            },
-            /**
-             * 检测数字
-             * @param theObj       要检测的字符串
-             * @returns {boolean}  是数字放回true  不是返回false
-             */
-            checkNumber:function(theObj) {
-                var reg = /^[0-9]+$/;
-                if(reg.test(theObj)){
-                    return true;
-                };
+                    }
+                }).catch(function (error) {
+                        console.log(error);
+                });;
+            }
+        },
+        detail:function(index){
+            this.$router.push({path:'/detail',query: {nickname: this.list[index].nickname}})
+        },
+        /**
+        * 初始化输入
+        */
+        init:function(){
+            this.nickname = "";
+            this.age = "";
+            this.isAge = true;
+        },
+        /**
+        * 检测数字
+        * @param theObj       要检测的字符串
+        * @returns {boolean}  是数字放回true  不是返回false
+        */
+        checkNumber:function(theObj) {
+            var reg = /^[0-9]+$/;
+            if(reg.test(theObj)){
+                return true;
+            };
                 return false;
             }
         },
