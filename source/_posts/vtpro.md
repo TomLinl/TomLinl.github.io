@@ -108,142 +108,142 @@ export default {
         this.getList()
     },
     methods:{
-        /**
-        * 获取列表数据
-        */
-        getList: function () {
-            let $this = this;
-            this.$axios.get(process.env.API_HOST)
-            .then(function(response){
-            $this.list = response.data;
-            console.log(response.data);
-            })
-            .catch(function (error) {
-            console.log(error);
+    /**
+    * 获取列表数据
+    */
+    getList: function () {
+        let $this = this;
+        this.$axios.get(process.env.API_HOST)
+        .then(function(response){
+        $this.list = response.data;
+        console.log(response.data);
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    },
+    /**
+    * 新增列表数据
+    */
+    addList:function(){
+        let $this = this;
+        if(!this.isAge){
+            return false;
+        }
+        if($this.nickname && $this.age){
+            $this.$axios.get(process.env.API_HOST + 'index/index/addList',{
+                params: {
+                    nickname: $this.nickname,
+                    age: $this.age
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                $this.list.push({
+                    nickname:response.data.nickname,
+                    age:response.data.age
+                });
+            }).catch(function (error) {
+                console.log(error);
             });
-        },
-        /**
-        * 新增列表数据
-        */
-        addList:function(){
-            let $this = this;
-            if(!this.isAge){
-                return false;
-            }
-            if($this.nickname && $this.age){
-                $this.$axios.get(process.env.API_HOST + 'index/index/addList',{
-                    params: {
-                        nickname: $this.nickname,
-                        age: $this.age
-                    }
-                }).then(function (response) {
-                    console.log(response.data);
-                    $this.list.push({
-                        nickname:response.data.nickname,
-                        age:response.data.age
-                    });
+        }
+    },
+    /**
+    * 删除列表数据
+    * @param index  list键值
+    */
+    delList:function(index){
+        let $this = this;
+        if(confirm('确定要删除吗')){
+            if($this.list[index] != undefined){
+                $this.$axios.post(process.env.API_HOST + 'index/index/delList',{
+                    nickname: $this.list[index].nickname
+                    }).then(function (response) {
+                        if(response.data=='操作成功'){
+                            $this.list.splice(index,1);
+                        }
                 }).catch(function (error) {
                     console.log(error);
                 });
             }
-        },
-        /**
-        * 删除列表数据
-        * @param index  list键值
-        */
-        delList:function(index){
-            let $this = this;
-            if(confirm('确定要删除吗')){
-                if($this.list[index] != undefined){
-                    $this.$axios.post(process.env.API_HOST + 'index/index/delList',{
-                            nickname: $this.list[index].nickname
-                        }).then(function (response) {
-                            if(response.data=='操作成功'){
-                                $this.list.splice(index,1);
-                            }
-                    }).catch(function (error) {
-                        console.log(error);
+        }
+    },
+    /**
+    * 清空或还原列表数据
+    */
+    controlList:function(){
+        if(confirm('确定要执行此操作吗')){
+            this.$axios.post(process.env.API_HOST + 'index/index/controlList').then(response=>{
+                if(response.data==''){
+                    this.list.splice(0,this.list.length);
+                }else{
+                    for (var i in response.data) {
+                        this.list.push({
+                        nickname:response.data[i].nickname,
+                        age:response.data[i].age
                     });
+                    }
                 }
+            }).catch(function (error) {
+                console.log(error);
+            });;
+        }
+    },
+    detail:function(index){
+        this.$router.push({path:'/detail',query: {nickname: this.list[index].nickname}})
+    },
+    /**
+    * 初始化输入
+    */
+    init:function(){
+        this.nickname = "";
+        this.age = "";
+        this.isAge = true;
+    },
+    /**
+    * 检测数字
+    * @param theObj       要检测的字符串
+    * @returns {boolean}  是数字放回true  不是返回false
+    */
+    checkNumber:function(theObj) {
+        var reg = /^[0-9]+$/;
+        if(reg.test(theObj)){
+            return true;
+        };
+            return false;
+        }
+    },
+    computed:{
+        sumAge:function(){
+            var ages = 0;
+            for (var i in this.list) {
+                ages += Number(this.list[i].age);
             }
-        },
-        /**
-        * 清空或还原列表数据
-        */
-        controlList:function(){
-            if(confirm('确定要执行此操作吗')){
-                this.$axios.post(process.env.API_HOST + 'index/index/controlList').then(response=>{
-                    if(response.data==''){
-                        this.list.splice(0,this.list.length);
-                    }else{
-                        for (var i in response.data) {
-                            this.list.push({
-                            nickname:response.data[i].nickname,
-                            age:response.data[i].age
-                        });
-                        }
-                    }
-                }).catch(function (error) {
-                        console.log(error);
-                });;
-            }
-        },
-        detail:function(index){
-            this.$router.push({path:'/detail',query: {nickname: this.list[index].nickname}})
-        },
-        /**
-        * 初始化输入
-        */
-        init:function(){
-            this.nickname = "";
-            this.age = "";
-            this.isAge = true;
-        },
-        /**
-        * 检测数字
-        * @param theObj       要检测的字符串
-        * @returns {boolean}  是数字放回true  不是返回false
-        */
-        checkNumber:function(theObj) {
-            var reg = /^[0-9]+$/;
-            if(reg.test(theObj)){
-                return true;
-            };
-                return false;
-            }
-        },
-        computed:{
-            sumAge:function(){
-                var ages = 0;
-                for (var i in this.list) {
-                    ages += Number(this.list[i].age);
+            return ages;
+        }
+    },
+    watch:{
+        age:{
+            /**
+            * 监听age的变化
+            * @param newValue
+            * @param oldValue
+            * @returns {boolean}
+            */
+            handler(newValue, oldValue){
+                if(newValue == ""){
+                    this.isAge = true;
+                    return true;
                 }
-                return ages;
-            }
-        },
-        watch:{
-            age:{
-                /**
-                 * 监听age的变化
-                 * @param newValue
-                 * @param oldValue
-                 * @returns {boolean}
-                 */
-                handler(newValue, oldValue){
-                    if(newValue == ""){
-                        this.isAge = true;
-                        return true;
-                    }
-                    var res = this.checkNumber(newValue);
-                    if(res){
-                        this.isAge = true;
-                    }else{
-                        this.isAge = false;
-                    }
+                var res = this.checkNumber(newValue);
+                if(res){
+                    this.isAge = true;
+                }else{
+                    this.isAge = false;
                 }
             }
         }
     }
+}
 </script>
 
 <style>
@@ -267,7 +267,7 @@ export default {
 详情部分代码
 ```cpp
 <template>
-    <div class="list-table">
+<div class="list-table">
     <h1>{{msg}}</h1>
     <table border="1" cellspacing="0">
     <thead>
@@ -291,22 +291,22 @@ export default {
     </tr>
     </table>
     <router-link to="/list">返回</router-link>
-    <div class="open-box" v-if="OpenShow">
-    <div class="open-box-content">
-        <h3>编辑信息</h3>
-        <p>请输入您的个人信息</p>
-        <textarea v-model="info">{{info}}</textarea>
-        <div class="open-box-btn">
-        <div class="open-box-btn-left">
-        <button @click="addinfo">保存</button>
-    </div>
-    <div class="open-box-btn-right">
-        <button @click="ColseModal">关闭</button>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="open-box" v-if="OpenShow">
+            <div class="open-box-content">
+                <h3>编辑信息</h3>
+                <p>请输入您的个人信息</p>
+                <textarea v-model="info">{{info}}</textarea>
+                <div class="open-box-btn">
+                    <div class="open-box-btn-left">
+                        <button @click="addinfo">保存</button>
+                    </div>
+                    <div class="open-box-btn-right">
+                        <button @click="ColseModal">关闭</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+</div>
 </template>
 
 <script>
