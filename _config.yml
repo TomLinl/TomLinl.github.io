@@ -74,6 +74,14 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -87,3 +95,9 @@ admin:
   username: TomlinL
   password_hash: $2a$10$YmVvW2yGEyyBrFJ8givQGu5spcylRrKIwds/wW/awY53pt.ckJnX2
   secret: TomlinL
+
+  search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
