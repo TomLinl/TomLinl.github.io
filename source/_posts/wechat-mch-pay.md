@@ -1,7 +1,9 @@
 ---
 title: 微信支付企业付款(PHP)
 date: 2018-04-07 16:56:01
-tags: 微信支付
+tags: 
+    - 微信支付
+    - PHP
 ---
 企业付款为企业提供付款至用户零钱的能力，支持通过API接口付款，或通过微信支付商户平台（pay.weixin.qq.com）网页操作付款。配置和说明可以参考[官方文档](https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_1/) 
 <!--more-->

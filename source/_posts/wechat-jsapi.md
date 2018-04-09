@@ -1,7 +1,9 @@
 ---
 title: 微信支付JSAPI(PHP)
 date: 2018-04-07 17:46:29
-tags: 微信支付
+tags: 
+    - 微信支付
+    - PHP
 ---
 公众号支付是用户在微信中打开商户的H5页面，商户在H5页面通过调用微信支付提供的JSAPI接口调起微信支付模块完成支付。适用于微信浏览器内完成微信支付。配置参考[官方文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_3)
 <!--more-->

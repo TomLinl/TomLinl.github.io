@@ -1,7 +1,9 @@
 ---
 title: Vue+tp5简单列表操作
 date: 2018-03-06 23:58:36
-tags: Vue
+tags: 
+    - Vue
+    - PHP
 ---
 前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。
 这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。
