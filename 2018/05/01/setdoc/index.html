@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="PHP," />
 
 
 
@@ -81,13 +81,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tom Linl&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/支付宝支付/index.html">
+<meta name="description" content="文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP实现文件上传与下载">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/setdoc/index.html">
 <meta property="og:site_name" content="Tom Linl&#39;s Blog">
+<meta property="og:description" content="文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-01T14:36:44.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tom Linl&#39;s Blog">
+<meta name="twitter:title" content="PHP实现文件上传与下载">
+<meta name="twitter:description" content="文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/支付宝支付/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/01/setdoc/"/>
 
 
 
 
 
-  <title>标签: 支付宝支付 | Tom Linl's Blog</title>
+  <title>PHP实现文件上传与下载 | Tom Linl's Blog</title>
   
 
 
@@ -166,7 +171,7 @@ code.has-numbering {
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
    
 
@@ -295,82 +300,179 @@ code.has-numbering {
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>支付宝支付<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/setdoc/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tom Linl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/36617664.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tom Linl's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/07/alipay-wap/" itemprop="url">
-              
-                <span itemprop="name">支付宝手机网站支付(PHP)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">PHP实现文件上传与下载</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T22:29:02+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T22:18:17+08:00">
+                2018-05-01
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/07/alipay/" itemprop="url">
-              
-                <span itemprop="name">支付宝APP支付服务端接入(PHP)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-07T16:04:00+08:00"
-              content="2018-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。<br><a id="more"></a></p>
+<h4 id="客户端配置："><a href="#客户端配置：" class="headerlink" title="客户端配置："></a>客户端配置：</h4><p>表单页面<br>表单发送方式为 post<br>添加 enctype=”multipart/form-data”</p>
+<p>通过使用 PHP 的全局数组 $_FILES，你可以从客户计算机向远程服务器上传文件。</p>
+<p>第一个参数是表单的 input name，第二个下标可以是 “name”, “type”, “size”, “tmp_name” 或 “error”。就像这样：</p>
+<p>$_FILES[“file”][“name”] - 被上传文件的名称<br>$_FILES[“file”][“type”] - 被上传文件的类型<br>$_FILES[“file”][“size”] - 被上传文件的大小，以字节计<br>$_FILES[“file”][“tmp_name”] - 存储在服务器的文件的临时副本的名称<br>$_FILES[“file”][“error”] - 由文件上传导致的错误代码</p>
+<p>move_uploaded_file() 函数将上传的文件移动到新位置。</p>
+<p>若成功，则返回 true，否则返回 false。</p>
+<p>move_uploaded_file(file,newloc)</p>
+<p>将文件从 source 拷贝到 destination。如果成功则返回 TRUE，否则返回 FALSE。<br>copy(source,destination)</p>
+<h4 id="文件上传配置"><a href="#文件上传配置" class="headerlink" title="文件上传配置"></a>文件上传配置</h4><p>file_uploads=on,支持HTTP上传<br>upload_tmp_dir=,临时文件保存的目录<br>upload_max_filesize=2M,允许上传文件的最大值<br>max_file_uploads=20,允许文件上传的最大文件数<br>post_max_size=8M,POST方式发送数据的最大值<br>max_execution_time=-1,设置了脚本被解析器终止之前允许的最大执行时间，单位为秒，防止程序写的不好而占尽服务器资源<br>max_input_time=60,脚本解析输入数据允许的最大时间，单位为秒<br>max_input_nesting_level=64,设置输入变量的嵌套深度<br>max_input_vars=1000,接受多少输入的变量（限制分别应用于$_GET、$_POST和$_COOKIE超全局变量）指令的使用减轻了以哈希碰撞来进行拒绝服务器攻击的可能性。如果有超过指令指定数量的变量，将会导致$_WARNING的产生，更多的输入变量将会从请求中截断。<br>memory_limit=128M,最大单线程的独立内存使用量。也就是一个web请求，给予线程最大使用量的定义。</p>
+<h4 id="错误信息说明"><a href="#错误信息说明" class="headerlink" title="错误信息说明"></a>错误信息说明</h4><p>1、UPLOAD_ERR_OK</p>
+<p>其值为 0，没有错误发生，文件上传成功。</p>
+<p>2、UPLOAD_ERR_INI_SIZE</p>
+<p>其值为 1，上传的文件超过了 php.ini 中 upload_max_filesize选项限制的值。</p>
+<p>3、UPLOAD_ERR_FORM_SIZE</p>
+<p>其值为 2，上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。</p>
+<p>4、UPLOAD_ERR_PARTIAL</p>
+<p>其值为 3，文件只有部分被上传。</p>
+<p>5、UPLOAD_ERR_NO_FILE</p>
+<p>其值为 4，没有文件被上传。</p>
+<p>6、UPLOAD_ERR_NO_TMP_DIR</p>
+<p>其值为 6，找不到临时文件夹。PHP 4.3.10 和 PHP 5.0.3 引进。</p>
+<p>7、UPLOAD_ERR_CANT_WRITE</p>
+<p>其值为 7，文件写入失败。PHP 5.1.0 引进。</p>
+<p>8、UPLOAD_ERR_EXTENSION</p>
+<p>其值为 8，上传的文件被PHP扩展程序中断</p>
+<h4 id="上传文件限制"><a href="#上传文件限制" class="headerlink" title="上传文件限制"></a>上传文件限制</h4><p>通过表单隐藏域限制文件上传的最大值<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type="hidden" name='MAX_FILE_SIZE' value='字节数' /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>通过accept属性限制上传文件类型<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"file"</span> name=<span class="string">"file"</span> accept=<span class="string">"文件的MIME类型"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>（ps:表单限制不可靠）<br>服务器限制<br>限制文件上传的大小、类型、检测类型、检测是否为HTTP POST方式上传</p>
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$filename=$_GET['filename'];</span><br><span class="line">header('Content-Disposition:attachment;filename='.$filename);</span><br><span class="line">header(<span class="string">"Content-length:"</span>.filesize($filename));</span><br><span class="line">readfile($filename);</span><br></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/layui-page/" rel="next" title="layui-Ajax分页">
+                <i class="fa fa-chevron-left"></i> layui-Ajax分页
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/01/OAuth/" rel="prev" title="PHP第三方登录—OAuth2.0协议">
+                PHP第三方登录—OAuth2.0协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -378,6 +480,15 @@ code.has-numbering {
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -398,8 +509,17 @@ code.has-numbering {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -461,6 +581,22 @@ code.has-numbering {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端配置："><span class="nav-number">1.</span> <span class="nav-text">客户端配置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件上传配置"><span class="nav-number">2.</span> <span class="nav-text">文件上传配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误信息说明"><span class="nav-number">3.</span> <span class="nav-text">错误信息说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上传文件限制"><span class="nav-number">4.</span> <span class="nav-text">上传文件限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件下载"><span class="nav-number">5.</span> <span class="nav-text">文件下载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -596,6 +732,10 @@ code.has-numbering {
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -621,6 +761,10 @@ code.has-numbering {
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2160732"></script>
+      <!-- UY END -->
     
   
 

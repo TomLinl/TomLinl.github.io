@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PHP第三方登录—OAuth2.0协议]]></title>
+    <url>%2F2018%2F05%2F01%2FOAuth%2F</url>
+    <content type="text"><![CDATA[OAuth 是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。目前，OAuth 的最新版本为 2.0 OAuth 允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth 允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要分享他们的访问许可或他们数据的所有内容。 OAuth授权流程1.请求OAuth登陆页Request Token URL - 未授权的令牌请求服务地址2.用户使用第三方账号登陆并授权3.返回登陆结果User Authorization URL - 用户授权的令牌请求服务地址AccessToken - 用户通过第三方应用访问OAuth接口令牌]]></content>
+      <tags>
+        <tag>PHP</tag>
+        <tag>OAuth2.0</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHP实现文件上传与下载]]></title>
+    <url>%2F2018%2F05%2F01%2Fsetdoc%2F</url>
+    <content type="text"><![CDATA[文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。 客户端配置：表单页面表单发送方式为 post添加 enctype=”multipart/form-data” 通过使用 PHP 的全局数组 $_FILES，你可以从客户计算机向远程服务器上传文件。 第一个参数是表单的 input name，第二个下标可以是 “name”, “type”, “size”, “tmp_name” 或 “error”。就像这样： $_FILES[“file”][“name”] - 被上传文件的名称$_FILES[“file”][“type”] - 被上传文件的类型$_FILES[“file”][“size”] - 被上传文件的大小，以字节计$_FILES[“file”][“tmp_name”] - 存储在服务器的文件的临时副本的名称$_FILES[“file”][“error”] - 由文件上传导致的错误代码 move_uploaded_file() 函数将上传的文件移动到新位置。 若成功，则返回 true，否则返回 false。 move_uploaded_file(file,newloc) 将文件从 source 拷贝到 destination。如果成功则返回 TRUE，否则返回 FALSE。copy(source,destination) 文件上传配置file_uploads=on,支持HTTP上传upload_tmp_dir=,临时文件保存的目录upload_max_filesize=2M,允许上传文件的最大值max_file_uploads=20,允许文件上传的最大文件数post_max_size=8M,POST方式发送数据的最大值max_execution_time=-1,设置了脚本被解析器终止之前允许的最大执行时间，单位为秒，防止程序写的不好而占尽服务器资源max_input_time=60,脚本解析输入数据允许的最大时间，单位为秒max_input_nesting_level=64,设置输入变量的嵌套深度max_input_vars=1000,接受多少输入的变量（限制分别应用于$_GET、$_POST和$_COOKIE超全局变量）指令的使用减轻了以哈希碰撞来进行拒绝服务器攻击的可能性。如果有超过指令指定数量的变量，将会导致$_WARNING的产生，更多的输入变量将会从请求中截断。memory_limit=128M,最大单线程的独立内存使用量。也就是一个web请求，给予线程最大使用量的定义。 错误信息说明1、UPLOAD_ERR_OK 其值为 0，没有错误发生，文件上传成功。 2、UPLOAD_ERR_INI_SIZE 其值为 1，上传的文件超过了 php.ini 中 upload_max_filesize选项限制的值。 3、UPLOAD_ERR_FORM_SIZE 其值为 2，上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值。 4、UPLOAD_ERR_PARTIAL 其值为 3，文件只有部分被上传。 5、UPLOAD_ERR_NO_FILE 其值为 4，没有文件被上传。 6、UPLOAD_ERR_NO_TMP_DIR 其值为 6，找不到临时文件夹。PHP 4.3.10 和 PHP 5.0.3 引进。 7、UPLOAD_ERR_CANT_WRITE 其值为 7，文件写入失败。PHP 5.1.0 引进。 8、UPLOAD_ERR_EXTENSION 其值为 8，上传的文件被PHP扩展程序中断 上传文件限制通过表单隐藏域限制文件上传的最大值1&lt;input type="hidden" name='MAX_FILE_SIZE' value='字节数' /&gt; 通过accept属性限制上传文件类型1&lt;input type="file" name="file" accept="文件的MIME类型" /&gt; （ps:表单限制不可靠）服务器限制限制文件上传的大小、类型、检测类型、检测是否为HTTP POST方式上传 文件下载1234$filename=$_GET['filename'];header('Content-Disposition:attachment;filename='.$filename);header("Content-length:".filesize($filename));readfile($filename);]]></content>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[layui-Ajax分页]]></title>
     <url>%2F2018%2F04%2F10%2Flayui-page%2F</url>
     <content type="text"><![CDATA[layPage 致力于提供极致的分页逻辑，既可轻松胜任异步分页，也可作为页面刷新式分页。下面是使用layui分页控件实现异步请求分页操作的实现方法。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748//引入组件js和css&lt;script src="__STATIC__/layui/layui.js"&gt;&lt;/script&gt;&lt;link rel="stylesheet" href="__STATIC__/layui/css/layui.css"&gt;$(function () &#123; var url = '请求地址' var data = &#123;&#125;; data.page = 1; ajax(data); function ajax(data) &#123; $.ajax(&#123; type: "post", url: url, data: data, success: function (result) &#123; var res = result.data; var count = result.count; var page = result.page; var limit = result.limit; console.log(res); //查看服务器返回的数据 if(count&gt;limit)&#123; lay_page(count,limit,page); &#125; &#125; &#125;) &#125; function lay_page(count,limit,page) &#123; layui.use(['laypage', 'layer'], function() &#123; var laypage = layui.laypage , layer = layui.layer; laypage.render(&#123; elem: '指向存放分页的容器，值可以是容器ID、DOM对象' , count: count //数据总数，从服务端得到 , limit: limit //每页显示的条数 , curr: page , jump: function (obj, first) &#123; //obj包含了当前分页的所有参数，比如： //console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。 //console.log(obj.limit); //得到每页显示的条数 //首次不执行 if (!first) &#123; data.page=obj.curr; ajax(data); &#125; &#125; &#125;); &#125;); &#125; &#125;)]]></content>
