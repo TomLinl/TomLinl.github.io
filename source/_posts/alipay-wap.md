@@ -10,7 +10,7 @@ tags:
 <!--more-->
 实现方法
 手机网站支付请求示例
-```javascript
+```php
 public function alipay(){
         require_once("alipay/wappay/service/AlipayTradeService.php");
         require_once("alipay/wappay/buildermodel/AlipayTradeWapPayContentBuilder.php");
@@ -70,7 +70,7 @@ public function alipay(){
     </script>
 ```
 回调示例
-```javascript
+```php
 public function alipay_notify()
     {
         require_once("alipay/wappay/service/AlipayTradeService.php");

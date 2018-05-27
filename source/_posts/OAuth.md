@@ -32,13 +32,13 @@ QQ登陆 (http://connect.qq.com)
 
 以微博登陆为例：
 config.php
-```
+```php
 define('WB_KEY','获取的AppKey');
 define('WB_SRC','获取的AppSecret');
 define('CALLBACK','回调地址(callback.php)');
 ```
 wblogin.php
-```
+```php
 <?php
 require_once 'config.php';
 require_once 'saetv2.ex.class.php';
@@ -48,7 +48,7 @@ $oauth = $o->getAuthorizeUrl($url);
 header('Location: '.$oauth);
 ```
 callback.php
-```
+```php
 <?php
 require_once 'config.php';
 require_once 'saetv2.ex.class.php';
@@ -61,7 +61,7 @@ setcookie('accesstoken',$auth['access_token'],time()+86400);
 header('location: index.php');
 ```
 index.php
-```
+```php
 <?php
      equire_once 'config.php';
      require_once 'saetv2.ex.class.php';
@@ -86,7 +86,7 @@ index.php
 </html>
 ```
 debug调试方法
-```
+```php
 function debug($val,$dump = false,$exit = true) {
     //自动获取函数名称$func
     if($dump){

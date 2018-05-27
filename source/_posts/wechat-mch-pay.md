@@ -10,7 +10,7 @@ tags:
 实现方法
 在微信官方SDK的WxPay.Api.php添加参考代码：
 企业向个人付款
-``` javascript 
+``` php 
     public function mchPay($params)
     {
 
@@ -40,7 +40,7 @@ tags:
         return $obj->GetValues();
     }
 ```
-```javascript
+```php
     //array转xml
     public function arrayToXml($arr)
     {
@@ -59,7 +59,7 @@ tags:
         return $xml;
     }
 ```
-```javascript
+```php
     //生成签名
     public function MakeSign($params)
     {
@@ -90,7 +90,7 @@ tags:
     }
 ```
 调用示例：
-```javascript 
+```php 
     $mchPay = new \WxPayApi();  
     $amount = '付款金额';//企业付款金额，单位“分”
     $desc = '企业付款';//描述

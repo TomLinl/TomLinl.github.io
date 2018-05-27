@@ -15,7 +15,7 @@ tags:
 {% asset_img sdk.png %}
 获取PHP版资源SDK要注意开发环境最好达到官方建议的环境要求，否则集成过程中要对SDK作调整来适配环境。
 PHP服务端SDK生成APP支付订单信息示例
-```cpp
+```php
 $aop = new AopClient;
 $aop->gatewayUrl = "https://openapi.alipay.com/gateway.do";
 $aop->appId = "app_id";

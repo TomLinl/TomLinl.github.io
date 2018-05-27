@@ -87,12 +87,12 @@ memory_limit=128M,最大单线程的独立内存使用量。也就是一个web�
 #### 上传文件限制
 
 通过表单隐藏域限制文件上传的最大值
-```cpp
+```html
 <input type="hidden" name='MAX_FILE_SIZE' value='字节数' />
 ```
 
 通过accept属性限制上传文件类型
-```cpp
+```html
 <input type="file" name="file" accept="文件的MIME类型" />
 ```
 （ps:表单限制不可靠）
@@ -104,7 +104,7 @@ memory_limit=128M,最大单线程的独立内存使用量。也就是一个web�
 #### 文件下载
 
 
-```cpp
+```php
 $filename=$_GET['filename'];
 header('Content-Disposition:attachment;filename='.$filename);
 header("Content-length:".filesize($filename));

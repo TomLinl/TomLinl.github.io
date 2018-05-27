@@ -9,7 +9,7 @@ tags:
 这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。
 <!--more-->
 Vue部分，在main.js中引入axios,qs来帮助处理数据，接口请求的时候会遇到跨域问题
-```cpp
+```javascript
 import axios from 'axios'
 import Qs from 'qs'
 Vue.prototype.$axios = axios;
@@ -26,7 +26,7 @@ headers:{'Content-Type':'application/x-www-form-urlencoded'}
 Vue.prototype.$axios = axios_instance;
 ```
 PHP部分后端响应头进行设置
-```cpp
+```php
 // 指定允许其他域名访问
 header("Access-Control-Allow-Origin:*");
 // 响应类型
@@ -37,7 +37,7 @@ header("Access-Control-Allow-Headers:x-requested-with,content-type");
 解决了跨域问题后，接下来就能通过接口请求和数据处理了。
 
 在Vue的/config/dev.env.js 设置 API_HOST
-```cpp
+```javascript
 'use strict'
 const merge = require('webpack-merge')
 const prodEnv = require('./prod.env')
@@ -51,7 +51,7 @@ API_HOST:'"http://127.0.0.1/tp5/"'
 下面是一个简单的列表，包含简单的增删改查，查看单条数据等功能
 {% asset_img list.png %}
 列表部分代码
-```cpp
+```html
 <template>
     <div class="list-table">
         <h1>TODO-LIST</h1>
@@ -267,7 +267,7 @@ export default {
 ```
 {% asset_img detail.png %}
 详情部分代码
-```cpp
+```html
 <template>
 <div class="list-table">
     <h1>{{msg}}</h1>
@@ -401,7 +401,7 @@ color: #fff;
 ```
 
 TP5中相应的代码做数据库处理
-```cpp
+```php
     /**
     * 获取列表数据
     */
@@ -475,7 +475,7 @@ TP5中相应的代码做数据库处理
 
 ```
 数据表结构
-```cpp
+```sql
 --
 -- 表的结构 `list_member`
 --

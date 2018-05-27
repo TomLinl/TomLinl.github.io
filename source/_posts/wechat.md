@@ -16,7 +16,7 @@ tags:
 集成服务端SDK
 {% asset_img sdk.png %}
 微信APP支付统一下单示例
-```javascript
+```php
 $input = new WxPayUnifiedOrder();
 $input->SetBody("test"); //商品描述
 $input->SetOut_trade_no("商户订单号");
@@ -30,12 +30,12 @@ $order = WxPayApi::unifiedOrder($input); //调用统一下单接口
 ```
 调起支付
 商户服务器生成支付订单，先调用【统一下单API】生成预付单，获取到prepay_id后将参数再次签名传输给APP发起支付。以下是调起微信支付的关键代码：
-```javascript
+```php
 $order_data = $WxPayApi->GetAppParameters($order); //调起支付所需的请求参数
 ```
 GetAppParameters()是外加的代码，微信SDK中没有这个方法，下面是在微信SDK中代码APP支付补充部分。
 在WxPay.Api.php中补充代码：
-```javascript
+```php
 /**
  *
  * 获取App支付的参数
@@ -68,7 +68,7 @@ public function GetAppParameters($UnifiedOrderResult)
 }
 ```
 在WxPay.Data.php中补充代码：
-```javascript
+```php
 /**
  *
  * 提交App输入对象
@@ -118,7 +118,7 @@ class WxPayAppPay extends WxPayDataBase
     public function SetNonceStr($value)
     {
         $this->values['noncestr'] = $value;
-}
+    }
 
     /**
      * 设置订单详情扩展字符串
@@ -140,7 +140,7 @@ class WxPayAppPay extends WxPayDataBase
 }
 ```
 回调处理的示列
-```javascript
+```php
 $WxPay = new \WxPayResults();
 header('Content-type: text/xml');
 $returnResult = $GLOBALS['HTTP_RAW_POST_DATA']; //接收微信发送的信息

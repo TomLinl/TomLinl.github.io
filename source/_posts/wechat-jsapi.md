@@ -9,7 +9,7 @@ tags:
 <!--more-->
 实现方法
 统一下单示例
-```javascript
+```php
         $tools = new JsApiPay();
         $openId = $tools->GetOpenid();//获取openid
         $input = new WxPayUnifiedOrder();
@@ -67,7 +67,7 @@ tags:
 </script>
 ```
 回调处理示列
-```javascript
+```php
 $WxPay = new \WxPayResults();
 header('Content-type: text/xml');
 $returnResult = $GLOBALS['HTTP_RAW_POST_DATA']; //接收微信发送的信息

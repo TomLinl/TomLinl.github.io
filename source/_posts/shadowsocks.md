@@ -8,24 +8,24 @@ vultr服务器购买：https://www.vultr.com/
 安装Xshell，安装完成后新建会话（Alt+N），协议选择SSH，主机填写之前的IP Address，端口号选择22。
 <!--more-->
 VPS可以先升级
-```cpp
+```
 yum -y update
 ```
 
 有些VPS 没有wget
 这种要先装
-```cpp
+```
 yum -y install wget
 ```
 
 输入以下命令：
-```cpp
+```
 1.wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
 2.chmod +x shadowsocks.sh
 3../shadowsocks.sh 2>&1 | tee shadowsocks.log
 ```
 第一行是下载命令，下载东西，第二行是修改权限，第三行是安装命令
-```cpp
+```
 配置：
 密码：（默认是teddysun.com）
 端口：默认是8989
@@ -33,7 +33,7 @@ yum -y install wget
 ```
 
 安装完成会有一个配置
-```cpp
+```
 Congratulations, shadowsocks install completed!Your Server IP:  ***** VPS的IP地址Your Server Port:  *****  你刚才设置的端口Your Password:  ****  你刚才设置的密码Your Local IP:  127.0.0.1 Your Local Port:  1080 Your Encryption Method:  aes-256-cfb Welcome to visit:https://teddysun.com/342.htmlEnjoy it!
 ```
 然后就可以用这些东西
@@ -47,7 +47,7 @@ VPS主机一键安装Google TCP BBR加速
 我们系统需要是CentOS 6+，Debian 7+，Ubuntu 12+，除了OpenVZ架构之外都支持，比如常规的KVM和XEN。
 
 第二、一键脚本安装
-```cpp
+```
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 chmod +x bbr.sh
 ./bbr.sh
@@ -56,30 +56,30 @@ chmod +x bbr.sh
 
 第三、检查BBR启动
 1、检查核心
-```cpp
+```
 uname -r
 ```
 检查内核是不是4.10，检测后看到的是"4.10.5-1.el6.elrepo.x86_64"。
 
 2、执行后返回
 "net.ipv4.tcp_available_congestion_control = bbr cubic reno"
-```cpp
+```
 sysctl net.ipv4.tcp_available_congestion_control
 ```
 
 3、执行后返回
 "net.ipv4.tcp_congestion_control = bbr"
-```cpp
+```
 sysctl net.ipv4.tcp_congestion_control
 ```
 
 4、查看返回值"net.core.default_qdisc = fq"
-```cpp
+```
 sysctl net.core.default_qdisc
 ```
 
 5、看到有BBR信息。说明安装成功了。
-```cpp
+```
 lsmod | grep bbr
 ```
 这样，在安装完毕BBR之后，我们去建站等用途的时候，应该是速度有提高的。
@@ -109,19 +109,19 @@ https://github.com/shadowsocks/shadowsocks-qt5/wiki
 #### 操作步骤
 
 下载脚本
-```cpp
+```
 wget -O ss.sh http://45.32.195.77/file/ss.sh
 ```
 执行脚本
-```cpp
+```
 bash ss.sh
 ```
 设置端口号并回车，直接回车是设置为1225
-```cpp
+```
 Please enter PORT(1225 default):
 ```
 设置密码并回车，直接回车是设置为123456
-```cpp
+```
 Please enter PASSWORD(123456 default):
 ```
 等待一会……就完成了（初次执行约2-5min）
