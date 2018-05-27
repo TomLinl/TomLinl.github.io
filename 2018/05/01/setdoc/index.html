@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Tom Linl&#39;s Blog">
 <meta property="og:description" content="文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-01T14:36:44.069Z">
+<meta property="og:updated_time" content="2018-05-27T13:15:35.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP实现文件上传与下载">
 <meta name="twitter:description" content="文件上传原理：将客户端的文件上传到服务器端，再将服务器端的临时文件移动到指定目录即可。">
@@ -407,10 +407,10 @@ code.has-numbering {
 <p>其值为 7，文件写入失败。PHP 5.1.0 引进。</p>
 <p>8、UPLOAD_ERR_EXTENSION</p>
 <p>其值为 8，上传的文件被PHP扩展程序中断</p>
-<h4 id="上传文件限制"><a href="#上传文件限制" class="headerlink" title="上传文件限制"></a>上传文件限制</h4><p>通过表单隐藏域限制文件上传的最大值<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type="hidden" name='MAX_FILE_SIZE' value='字节数' /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>通过accept属性限制上传文件类型<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"file"</span> name=<span class="string">"file"</span> accept=<span class="string">"文件的MIME类型"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="上传文件限制"><a href="#上传文件限制" class="headerlink" title="上传文件限制"></a>上传文件限制</h4><p>通过表单隐藏域限制文件上传的最大值<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">'MAX_FILE_SIZE'</span> <span class="attr">value</span>=<span class="string">'字节数'</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过accept属性限制上传文件类型<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"文件的MIME类型"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>（ps:表单限制不可靠）<br>服务器限制<br>限制文件上传的大小、类型、检测类型、检测是否为HTTP POST方式上传</p>
-<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$filename=$_GET['filename'];</span><br><span class="line">header('Content-Disposition:attachment;filename='.$filename);</span><br><span class="line">header(<span class="string">"Content-length:"</span>.filesize($filename));</span><br><span class="line">readfile($filename);</span><br></pre></td></tr></table></figure>
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$filename=$_GET[<span class="string">'filename'</span>];</span><br><span class="line">header(<span class="string">'Content-Disposition:attachment;filename='</span>.$filename);</span><br><span class="line">header(<span class="string">"Content-length:"</span>.filesize($filename));</span><br><span class="line">readfile($filename);</span><br></pre></td></tr></table></figure>
       
     </div>
     
