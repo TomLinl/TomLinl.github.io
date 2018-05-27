@@ -18,3 +18,86 @@ Request Token URL - 未授权的令牌请求服务地址
 3.返回登陆结果
 User Authorization URL - 用户授权的令牌请求服务地址
 AccessToken - 用户通过第三方应用访问OAuth接口令牌
+
+新浪微博登陆 (http://open.weibo.com)
+1.申请AppID和AppKey
+2.下载PHP版本SDK
+3.接入开发
+
+QQ登陆 (http://connect.qq.com)
+1.申请AppID和AppKey
+2.下载PHP版本SDK
+3.SDK配置
+4.接入开发
+
+以微博登陆为例：
+config.php
+```
+define('WB_KEY','获取的AppKey');
+define('WB_SRC','获取的AppSecret');
+define('CALLBACK','回调地址(callback.php)');
+```
+wblogin.php
+```
+<?php
+require_once 'config.php';
+require_once 'saetv2.ex.class.php';
+$o = new SaeTOAuthV2('WB_KEY','WB_SRC');
+$url = CALLBACK；
+$oauth = $o->getAuthorizeUrl($url);
+header('Location: '.$oauth);
+```
+callback.php
+```
+<?php
+require_once 'config.php';
+require_once 'saetv2.ex.class.php';
+$code = $_GET('code');
+$keys['code'] = $code;
+$keys['redirect_uri'] = CALLBACK;
+$o = new SaeTOAuthV2('WB_KEY','WB_SRC');
+$auth = $o->getAccessToken($keys);
+setcookie('accesstoken',$auth['access_token'],time()+86400);
+header('location: index.php');
+```
+index.php
+```
+<?php
+     equire_once 'config.php';
+     require_once 'saetv2.ex.class.php';
+    $isLogin=isset($_COOKIE['accesstoken']);
+?>
+<!DOCTYPE html>
+<html>
+     <head>
+          <meta charset="UTF-8">
+          <title>微博测试</title>
+     </head>
+     <body>
+          <?php if(!$isLogin){ ?>
+               <a href='wblogin.php'><img src='./weibo_login.png'></a>
+          <?php }else{ ?>
+              您已成功登陆微博账号；
+          <?php
+             $o = new SaeTClientV2('WB_KEY','WB_SRC',$_COOKIE['accesstoken']);     //调用接口发布微博
+             $o->update('发布微博');
+          } ?>
+     </body>
+</html>
+```
+debug调试方法
+```
+function debug($val,$dump = false,$exit = true) {
+    //自动获取函数名称$func
+    if($dump){
+          $func = 'var_dump';
+     } else {
+          $func = (is_array($val) || is_object($val) )? 'print_r' : 'printf';
+     }
+    header("Content-type: text/html; charset = utf-8");
+    echo '<pre>debug output:<hr />';
+    $func($val);
+    echo '</pre>';
+    if($exit); exit;
+}
+```
