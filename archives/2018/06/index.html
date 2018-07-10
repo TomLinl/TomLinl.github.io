@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="layui,Ajax," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,18 +81,13 @@
 
 
 
-<meta name="description" content="layPage 致力于提供极致的分页逻辑，既可轻松胜任异步分页，也可作为页面刷新式分页。下面是使用layui分页控件实现异步请求分页操作的实现方法。">
-<meta name="keywords" content="layui,Ajax">
-<meta property="og:type" content="article">
-<meta property="og:title" content="layui-Ajax分页">
-<meta property="og:url" content="http://yoursite.com/2018/04/10/layui-page/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tom Linl&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2018/06/index.html">
 <meta property="og:site_name" content="Tom Linl&#39;s Blog">
-<meta property="og:description" content="layPage 致力于提供极致的分页逻辑，既可轻松胜任异步分页，也可作为页面刷新式分页。下面是使用layui分页控件实现异步请求分页操作的实现方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T16:46:07.480Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="layui-Ajax分页">
-<meta name="twitter:description" content="layPage 致力于提供极致的分页逻辑，既可轻松胜任异步分页，也可作为页面刷新式分页。下面是使用layui分页控件实现异步请求分页操作的实现方法。">
+<meta name="twitter:title" content="Tom Linl&#39;s Blog">
 
 
 
@@ -122,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/10/layui-page/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/06/"/>
 
 
 
 
 
-  <title>layui-Ajax分页 | Tom Linl's Blog</title>
+  <title>归档 | Tom Linl's Blog</title>
   
 
 
@@ -171,7 +166,7 @@ code.has-numbering {
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right page-archive">
     <div class="headband"></div>
    
 
@@ -300,153 +295,74 @@ code.has-numbering {
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 12 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/layui-page/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tom Linl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/36617664.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tom Linl's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">layui-Ajax分页</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2018/06/22/bdtj/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">百度统计API</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T00:20:28+08:00">
-                2018-04-10
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-06-22T20:24:36+08:00"
+              content="2018-06-22" >
+          06-22
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>layPage 致力于提供极致的分页逻辑，既可轻松胜任异步分页，也可作为页面刷新式分页。下面是使用layui分页控件实现异步请求分页操作的实现方法。<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入组件js和css</span></span><br><span class="line">&lt;script src=<span class="string">"__STATIC__/layui/layui.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"__STATIC__/layui/css/layui.css"</span>&gt;</span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> url = <span class="string">'请求地址'</span></span><br><span class="line">        <span class="keyword">var</span> data = &#123;&#125;;</span><br><span class="line">        data.page = <span class="number">1</span>;</span><br><span class="line">        ajax(data);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">                type: <span class="string">"post"</span>,</span><br><span class="line">                url: url,</span><br><span class="line">                data: data,</span><br><span class="line">                success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> res = result.data;</span><br><span class="line">                    <span class="keyword">var</span> count = result.count;</span><br><span class="line">                    <span class="keyword">var</span> page = result.page;</span><br><span class="line">                    <span class="keyword">var</span> limit = result.limit;</span><br><span class="line">                    <span class="built_in">console</span>.log(res); <span class="comment">//查看服务器返回的数据</span></span><br><span class="line">                    <span class="keyword">if</span>(count&gt;limit)&#123;</span><br><span class="line">                        lay_page(count,limit,page);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">lay_page</span>(<span class="params">count,limit,page</span>) </span>&#123;</span><br><span class="line">            layui.use([<span class="string">'laypage'</span>, <span class="string">'layer'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> laypage = layui.laypage</span><br><span class="line">                        , layer = layui.layer;</span><br><span class="line">                laypage.render(&#123;</span><br><span class="line">                    elem: <span class="string">'指向存放分页的容器，值可以是容器ID、DOM对象'</span></span><br><span class="line">                    , <span class="attr">count</span>: count <span class="comment">//数据总数，从服务端得到</span></span><br><span class="line">                    , <span class="attr">limit</span>: limit <span class="comment">//每页显示的条数</span></span><br><span class="line">                    , <span class="attr">curr</span>: page</span><br><span class="line">                    , <span class="attr">jump</span>: <span class="function"><span class="keyword">function</span> (<span class="params">obj, first</span>) </span>&#123;</span><br><span class="line">                        <span class="comment">//obj包含了当前分页的所有参数，比如：</span></span><br><span class="line">                        <span class="comment">//console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。</span></span><br><span class="line">                        <span class="comment">//console.log(obj.limit); //得到每页显示的条数</span></span><br><span class="line">                        <span class="comment">//首次不执行</span></span><br><span class="line">                        <span class="keyword">if</span> (!first) &#123;</span><br><span class="line">                            data.page=obj.curr;</span><br><span class="line">                            ajax(data);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/layui/" rel="tag"># layui</a>
-          
-            <a href="/tags/Ajax/" rel="tag"># Ajax</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/07/alipay-wap/" rel="next" title="支付宝手机网站支付(PHP)">
-                <i class="fa fa-chevron-left"></i> 支付宝手机网站支付(PHP)
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/01/setdoc/" rel="prev" title="PHP实现文件上传与下载">
-                PHP实现文件上传与下载 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -454,15 +370,6 @@ code.has-numbering {
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="uyan_frame"></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -681,10 +588,6 @@ code.has-numbering {
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -710,10 +613,6 @@ code.has-numbering {
   
     
 
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2160732"></script>
-      <!-- UY END -->
     
   
 
