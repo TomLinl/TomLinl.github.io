@@ -47,10 +47,9 @@ header(‘Content-type:text/json’);
 $res = json_decode($ret['raw'], true);
 print_r($res);
 ```
-```php
-//打印结果如下：
-Array
-(
+打印结果如下：
+
+    Array(
     [header] => Array
         (
             [desc] => success
@@ -98,14 +97,8 @@ Array
                                                         )
 
                                                 )
-
-                                            [2] => Array
-                                                (
-                                                )
-
-                                            [3] => Array
-                                                (
-                                                )
+                                            .
+                                            .
 
                                         )
 
@@ -125,10 +118,7 @@ Array
                                                     [4] => 12.34
                                                 )
 
-                                            [1] => Array
-                                                (
-                                                )
-
+                                            .
                                         )
 
                                     [offset] => 0
@@ -142,14 +132,8 @@ Array
                                                     [3] => 426
                                                     [4] => 12.34
                                                 )
-
-                                            [1] => Array
-                                                (
-                                                )
-
-                                            [2] => Array
-                                                (
-                                                )
+                                          .
+                                          .
 
                                         )
 
@@ -170,10 +154,9 @@ Array
                 )
 
         )
+    )
 
-)
-```
-下面新建GetData.php写一个方法获取数据并处理
+下面新建GetData.php写一个方法获取数据并处理,数据比较乱，处理成以fields为键名对应相应的值的键值对形式便于处理
 ```php
 <?php
 
@@ -229,10 +212,10 @@ function getBdData($start_date, $end_date, $gran = '', $metrics = 'pv_count,visi
     return $res["items"][1];
 }
 ```
-```php
-//结果如下:[items][1][0]就是处理后想得到的形式
-Array
-(
+结果如下:[items][1][0]就是处理后想得到的形式  
+
+    Array
+    (
     [total] => 1
     [items] => Array
         (
@@ -255,8 +238,7 @@ Array
             .
             .
             .
-)            
-```
+    )            
 最后在控制器中调用getBdData方法获取数据并存入数据库
 ```php
  public function getBdTongJi(){
