@@ -1343,7 +1343,7 @@ pre,
 }
 code {
   padding: 2px 4px;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   overflow: hidden;
   white-space: nowrap;
   color: #666666;
@@ -1596,5 +1596,50 @@ pre .javascript .function {
     display: block;
     content: "";
     margin-bottom: 10px;
+  }
+}
+pre {
+  position: relative;
+}
+pre code.has-numbering {
+  margin-left: 1.7em !important; /*因为显示行号，所以离左边有一定的距离*/
+  word-wrap: normal; 
+  word-break: keep-all;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+pre .pre-numbering {
+  position: absolute; /*绝对定位*/
+  top: 0;
+  left: 0;
+  width: 2.2em; /*行号的宽度*/
+  height: 100%;
+  padding: 0.5em; /*上下padding保持与<code>一致，不然出现错位*/
+  border-right: 1px solid #C3CCD0;
+  border-radius: 3px 0 0 3px;
+  background-color: #EEE;
+  text-align: right;
+  font-size: 0.96em; /*字体大小与<code>一致*/
+  color: #AAA;
+  list-style: none;
+  margin: 0 !important;
+}
+
+.pre-numbering li{
+  margin: 0 !important;
+}
+
+
+@media (max-width: 767px) {
+  .pre-numbering {
+    display: none;
+  }
+  code.has-numbering {
+    margin-left: -10px !important;
+    word-wrap: break-world !important;
+    white-space: pre-wrap !important;
   }
 }
