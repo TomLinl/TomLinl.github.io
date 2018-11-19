@@ -179,7 +179,7 @@ gitment:
 
 ### 来必力
 livere:
-  enable: false
+  enable: true
   livere_uid: MTAyMC8zMzA1MS85NjEz
 
 ### 友言评论(服务不稳定)
@@ -201,7 +201,7 @@ changyan:
 
 ## Valine评论
 valine:
-   enable: true
+   enable: false
    appId: xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz
    appKey: erIpQac4azoCmgfBB7Dl9maa
    placeholder: 说点什么吧
