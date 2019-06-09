@@ -242,8 +242,9 @@ pre {
   height: 180px;
   width: 100%;
   background: #fff url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner.jpg);
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   overflow: hidden;
+  background-size: cover;
 }
 .main-header .banneriframe {
   width: 100%;
