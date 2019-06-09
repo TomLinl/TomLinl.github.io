@@ -1,743 +1,771 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<!DOCTYPE HTML>
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="TomLinl&#39;s Blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
 
 
 
 
 
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
 
 
+<title>Vue+tp5简单列表操作 | TomLinl&#39;s Blog</title>
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate" href="/atom.xml" title="TomLinl&#39;s Blog" type="application/atom+xml">
 
 
+    <link rel="icon" href="/favicon.ico">
 
+    
 
 
 
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+<link rel="stylesheet" href="/css/github.min.css?rev=@@hash">
 
 
 
 
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
 
 
 
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+    
 
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="PHP,Vue," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Tom Linl's Blog" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。">
-<meta name="keywords" content="PHP,Vue">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Vue+tp5简单列表操作">
-<meta property="og:url" content="http://yoursite.com/2018/03/06/vtpro/index.html">
-<meta property="og:site_name" content="Tom Linl&#39;s Blog">
-<meta property="og:description" content="前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/06/vtpro/list.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/06/vtpro/detail.png">
-<meta property="og:updated_time" content="2018-05-27T13:19:44.952Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue+tp5简单列表操作">
-<meta name="twitter:description" content="前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/06/vtpro/list.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2018/03/06/vtpro/"/>
-
-
-
-
-
-  <title>Vue+tp5简单列表操作 | Tom Linl's Blog</title>
-  
-
-
-
-
-
-
-
-
+    <script src="/js/jquery-2.1.1.min.js?rev=@@hash"></script>
+    <script src="/js/highlight.js?rev=@@hash"></script>
 </head>
 
+
+<!--[if lte IE 8]>
 <style>
-code.has-numbering {
-  margin-left: 10px;
-  word-wrap: normal;
-  word-break: keep-all;
-  white-space: pre;
-}
-
-.pre-numbering {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 100%;
-  padding: .5em 0.2em .5em 0;
-  border-right: 1px solid #C3CCD0;
-  border-radius: 3px 0 0 3px;
-  background-color: #EEE;
-  text-align: right;
-  font-size: 1.0em;
-  color: #AAA;
-  list-style: none;
-}
+    html{ font-size: 1em }
 </style>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-right page-post-detail">
-    <div class="headband"></div>
-   
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Tom Linl's Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='TomLinl'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> TomLinl&#39;s Blog </h2>
+            
+    	</div>
     </div>
-      
-        <p class="site-subtitle">o(*￣▽￣*)ブ</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/vtpro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tom Linl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/36617664.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tom Linl's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Vue+tp5简单列表操作</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T23:58:36+08:00">
-                2018-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。<br>这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。<br><a id="more"></a><br>Vue部分，在main.js中引入axios,qs来帮助处理数据，接口请求的时候会遇到跨域问题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> Qs <span class="keyword">from</span> <span class="string">'qs'</span></span><br><span class="line">Vue.prototype.$axios = axios;</span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> axios_instance = axios.create(&#123;</span><br><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">data = Qs.stringify(data);</span><br><span class="line"><span class="keyword">return</span> data;</span><br><span class="line">&#125;],</span><br><span class="line"><span class="comment">//Post请求传递参数时，需要在请求头加上item.ContentType = "application/x-www-form-urlencoded";</span></span><br><span class="line">headers:&#123;<span class="string">'Content-Type'</span>:<span class="string">'application/x-www-form-urlencoded'</span>&#125;</span><br><span class="line">&#125;)</span><br><span class="line">Vue.prototype.$axios = axios_instance;</span><br></pre></td></tr></table></figure></p>
-<p>PHP部分后端响应头进行设置<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定允许其他域名访问</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Origin:*"</span>);</span><br><span class="line"><span class="comment">// 响应类型</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE"</span>);</span><br><span class="line"><span class="comment">// 响应头设置</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Headers:x-requested-with,content-type"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>解决了跨域问题后，接下来就能通过接口请求和数据处理了。</p>
-<p>在Vue的/config/dev.env.js 设置 API_HOST<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>)</span><br><span class="line"><span class="keyword">const</span> prodEnv = <span class="built_in">require</span>(<span class="string">'./prod.env'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</span><br><span class="line">NODE_ENV: <span class="string">'"development"'</span>,</span><br><span class="line">API_HOST:<span class="string">'"http://127.0.0.1/tp5/"'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>下面是一个简单的列表，包含简单的增删改查，查看单条数据等功能<br><img src="/2018/03/06/vtpro/list.png"><br>列表部分代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-table"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>TODO-LIST<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">            姓名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"nickname"</span>/&gt;</span> &#123;&#123;nickname&#125;&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">            年龄：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"age"</span>/&gt;</span>  &#123;&#123;age&#125;&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:red"</span> <span class="attr">v-if</span>=<span class="string">"!isAge"</span>&gt;</span>年龄必须是数字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> @<span class="attr">click</span>=<span class="string">"addList"</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> @<span class="attr">click</span>=<span class="string">"init()"</span>&gt;</span>重置<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span> <span class="attr">cellspacing</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>序号<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">"(data,index) in  list"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;index+1&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;data.nickname&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;data.age&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"detail(index)"</span>&gt;</span>查看详情<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"delList(index)"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"2"</span> <span class="attr">style</span>=<span class="string">"text-align: center"</span>&gt;</span>总年龄：<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;sumAge&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"controlList"</span>&gt;</span>清空/还原<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name:<span class="string">"TODOList"</span></span></span><br><span class="line"><span class="undefined">    data () &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">//姓名</span></span></span><br><span class="line"><span class="javascript">            nickname:<span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">            <span class="comment">//年龄</span></span></span><br><span class="line"><span class="javascript">            age:<span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">            <span class="comment">//age是数字</span></span></span><br><span class="line"><span class="javascript">            isAge:<span class="literal">true</span>,</span></span><br><span class="line"><span class="undefined">            list: [],</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    created()&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.getList()</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    methods:&#123;</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 获取列表数据</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    getList: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> $<span class="keyword">this</span> = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$axios.get(process.env.API_HOST)</span></span><br><span class="line"><span class="javascript">        .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $<span class="keyword">this</span>.list = response.data;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(response.data);</span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="javascript">        .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 新增列表数据</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    addList:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> $<span class="keyword">this</span> = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(!<span class="keyword">this</span>.isAge)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>($<span class="keyword">this</span>.nickname &amp;&amp; $<span class="keyword">this</span>.age)&#123;</span></span><br><span class="line"><span class="javascript">            $<span class="keyword">this</span>.$axios.get(process.env.API_HOST + <span class="string">'index/index/addList'</span>,&#123;</span></span><br><span class="line"><span class="undefined">                params: &#123;</span></span><br><span class="line"><span class="javascript">                    nickname: $<span class="keyword">this</span>.nickname,</span></span><br><span class="line"><span class="javascript">                    age: $<span class="keyword">this</span>.age</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">            &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(response.data);</span></span><br><span class="line"><span class="javascript">                $<span class="keyword">this</span>.list.push(&#123;</span></span><br><span class="line"><span class="undefined">                    nickname:response.data.nickname,</span></span><br><span class="line"><span class="undefined">                    age:response.data.age</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="javascript">            &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">            &#125;);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 删除列表数据</span></span><br><span class="line"><span class="undefined">    * @param index  list键值</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    delList:<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> $<span class="keyword">this</span> = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(confirm(<span class="string">'确定要删除吗'</span>))&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>($<span class="keyword">this</span>.list[index] != <span class="literal">undefined</span>)&#123;</span></span><br><span class="line"><span class="javascript">                $<span class="keyword">this</span>.$axios.post(process.env.API_HOST + <span class="string">'index/index/delList'</span>,&#123;</span></span><br><span class="line"><span class="javascript">                    nickname: $<span class="keyword">this</span>.list[index].nickname</span></span><br><span class="line"><span class="javascript">                    &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">if</span>(response.data==<span class="string">'操作成功'</span>)&#123;</span></span><br><span class="line"><span class="javascript">                            $<span class="keyword">this</span>.list.splice(index,<span class="number">1</span>);</span></span><br><span class="line"><span class="undefined">                        &#125;</span></span><br><span class="line"><span class="javascript">                &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 清空或还原列表数据</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    controlList:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(confirm(<span class="string">'确定要执行此操作吗'</span>))&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.$axios.post(process.env.API_HOST + <span class="string">'index/index/controlList'</span>).then(<span class="function"><span class="params">response</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(response.data==<span class="string">''</span>)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.list.splice(<span class="number">0</span>,<span class="keyword">this</span>.list.length);</span></span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> response.data) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">this</span>.list.push(&#123;</span></span><br><span class="line"><span class="undefined">                        nickname:response.data[i].nickname,</span></span><br><span class="line"><span class="undefined">                        age:response.data[i].age</span></span><br><span class="line"><span class="undefined">                    &#125;);</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">            &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">            &#125;);;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="javascript">    detail:<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$router.push(&#123;<span class="attr">path</span>:<span class="string">'/detail'</span>,<span class="attr">query</span>: &#123;<span class="attr">nickname</span>: <span class="keyword">this</span>.list[index].nickname&#125;&#125;)</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 初始化输入</span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.nickname = <span class="string">""</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.age = <span class="string">""</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.isAge = <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 检测数字</span></span><br><span class="line"><span class="undefined">    * @param theObj       要检测的字符串</span></span><br><span class="line"><span class="javascript">    * @returns &#123;boolean&#125;  是数字放回<span class="literal">true</span>  不是返回<span class="literal">false</span></span></span><br><span class="line"><span class="undefined">    */</span></span><br><span class="line"><span class="javascript">    checkNumber:<span class="function"><span class="keyword">function</span>(<span class="params">theObj</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> reg = <span class="regexp">/^[0-9]+$/</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(reg.test(theObj))&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    computed:&#123;</span></span><br><span class="line"><span class="javascript">        sumAge:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> ages = <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> <span class="keyword">this</span>.list) &#123;</span></span><br><span class="line"><span class="javascript">                ages += <span class="built_in">Number</span>(<span class="keyword">this</span>.list[i].age);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> ages;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    watch:&#123;</span></span><br><span class="line"><span class="undefined">        age:&#123;</span></span><br><span class="line"><span class="undefined">            /**</span></span><br><span class="line"><span class="undefined">            * 监听age的变化</span></span><br><span class="line"><span class="undefined">            * @param newValue</span></span><br><span class="line"><span class="undefined">            * @param oldValue</span></span><br><span class="line"><span class="undefined">            * @returns &#123;boolean&#125;</span></span><br><span class="line"><span class="undefined">            */</span></span><br><span class="line"><span class="undefined">            handler(newValue, oldValue)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(newValue == <span class="string">""</span>)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.isAge = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> res = <span class="keyword">this</span>.checkNumber(newValue);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(res)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.isAge = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.isAge = <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .list-table&#123;</span></span><br><span class="line"><span class="undefined">        width: 100%;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .list-table table&#123;</span></span><br><span class="line"><span class="undefined">        margin: 0 auto;</span></span><br><span class="line"><span class="undefined">        width: 500px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .list-table table th&#123;</span></span><br><span class="line"><span class="undefined">        font-size: 28px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .list-table table td&#123;</span></span><br><span class="line"><span class="undefined">        padding: 5px 0;</span></span><br><span class="line"><span class="undefined">        font-size: 20px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<img src="/2018/03/06/vtpro/detail.png">
-<p>详情部分代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-table"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span> <span class="attr">cellspacing</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>用户UID<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;uid&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;nickname&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123;age&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"2"</span>&gt;</span>信息介绍<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> @<span class="attr">click</span>=<span class="string">"OpenModal"</span>&gt;</span>添加/编辑信息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"3"</span> <span class="attr">v-if</span>=<span class="string">"info"</span>&gt;</span>&#123;&#123;info&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/list"</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"open-box"</span> <span class="attr">v-if</span>=<span class="string">"OpenShow"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"open-box-content"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h3</span>&gt;</span>编辑信息<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>请输入您的个人信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">v-model</span>=<span class="string">"info"</span>&gt;</span>&#123;&#123;info&#125;&#125;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"open-box-btn"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"open-box-btn-left"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"addinfo"</span>&gt;</span>保存<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"open-box-btn-right"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"ColseModal"</span>&gt;</span>关闭<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name: <span class="string">'Detail'</span>,</span></span><br><span class="line"><span class="undefined">    data () &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">        msg: <span class="string">'信息详情'</span>,</span></span><br><span class="line"><span class="javascript">        uid:<span class="string">''</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">//姓名</span></span></span><br><span class="line"><span class="javascript">        nickname:<span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">//年龄</span></span></span><br><span class="line"><span class="javascript">        age:<span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">        OpenShow: <span class="literal">false</span>,</span></span><br><span class="line"><span class="javascript">        info:<span class="string">''</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    created()&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.getinfo()</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    methods:&#123;</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">    * 获取信息</span></span><br><span class="line"><span class="undefined">    */    </span></span><br><span class="line"><span class="javascript">    getinfo: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> $<span class="keyword">this</span> = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$axios.get(process.env.API_HOST+<span class="string">'index/index/getInfo'</span>,&#123;</span></span><br><span class="line"><span class="javascript">        params:&#123;<span class="attr">nickname</span>:<span class="keyword">this</span>.$route.query.nickname&#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $<span class="keyword">this</span>.nickname = response.data.nickname</span></span><br><span class="line"><span class="javascript">        $<span class="keyword">this</span>.age = response.data.age</span></span><br><span class="line"><span class="javascript">        $<span class="keyword">this</span>.uid = response.data.uid</span></span><br><span class="line"><span class="javascript">        $<span class="keyword">this</span>.info = response.data.info</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(response.data);</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">     /**</span></span><br><span class="line"><span class="undefined">     * 编辑信息</span></span><br><span class="line"><span class="undefined">     */  </span></span><br><span class="line"><span class="javascript">    addinfo: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$axios.post(process.env.API_HOST+<span class="string">'index/index/addInfo'</span>,&#123;</span></span><br><span class="line"><span class="javascript">        info:<span class="keyword">this</span>.info,</span></span><br><span class="line"><span class="javascript">        uid:<span class="keyword">this</span>.uid</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    .then(<span class="function"><span class="params">response</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="undefined">        alert(response.data)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.OpenShow = !<span class="keyword">this</span>.OpenShow</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(error);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    OpenModal() &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.OpenShow = !<span class="keyword">this</span>.OpenShow</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    ColseModal() &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.OpenShow = !<span class="keyword">this</span>.OpenShow</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">.list-table&#123;</span></span><br><span class="line"><span class="undefined">width: 100%;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">.list-table table&#123;</span></span><br><span class="line"><span class="undefined">margin: 0 auto;</span></span><br><span class="line"><span class="undefined">...</span></span><br><span class="line"><span class="undefined">/*样式部分省略*/</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">/*弹窗样式*/</span></span><br><span class="line"><span class="undefined">.open-box &#123;</span></span><br><span class="line"><span class="undefined">position: fixed;</span></span><br><span class="line"><span class="undefined">background: rgba(0, 0, 0, 0.4);</span></span><br><span class="line"><span class="undefined">width: 100%;</span></span><br><span class="line"><span class="undefined">height: 100%;</span></span><br><span class="line"><span class="undefined">left: 0;</span></span><br><span class="line"><span class="undefined">top: 0;</span></span><br><span class="line"><span class="undefined">z-index: 100;</span></span><br><span class="line"><span class="undefined">color: #fff;</span></span><br><span class="line"><span class="undefined">...</span></span><br><span class="line"><span class="undefined">/*样式部分省略*/</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>TP5中相应的代码做数据库处理<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 获取列表数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $res = model(<span class="string">'Member'</span>)-&gt;getUserList();</span><br><span class="line">    <span class="keyword">return</span> $res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 新增列表数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addList</span><span class="params">()</span></span>&#123;</span><br><span class="line">    $nickname=Input(<span class="string">'nickname'</span>);</span><br><span class="line">    $age=Input(<span class="string">'age'</span>,<span class="number">0</span>,<span class="string">'floatval'</span>);</span><br><span class="line">    $res = model(<span class="string">'Member'</span>)-&gt;save([</span><br><span class="line">        <span class="string">'nickname'</span>=&gt;$nickname,</span><br><span class="line">        <span class="string">'age'</span>=&gt;$age,</span><br><span class="line">        <span class="string">'status'</span>=&gt;<span class="number">1</span></span><br><span class="line">    ]);</span><br><span class="line">    <span class="keyword">if</span>($res)&#123;</span><br><span class="line">        $data=[<span class="string">'nickname'</span>=&gt;$nickname,<span class="string">'age'</span>=&gt;$age];</span><br><span class="line">        $data = json_encode($data);</span><br><span class="line">        <span class="keyword">return</span> $data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 删除列表数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">delList</span><span class="params">()</span></span>&#123;</span><br><span class="line">    $nickname=Input(<span class="string">'nickname'</span>);</span><br><span class="line">    model(<span class="string">'Member'</span>)-&gt;save([<span class="string">'status'</span>=&gt;<span class="number">-1</span>],[<span class="string">'nickname'</span>=&gt;$nickname]);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'操作成功'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 清空还原列表数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">controlList</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!model(<span class="string">'Member'</span>)-&gt;where([<span class="string">'status'</span>=&gt;<span class="number">1</span>])-&gt;count())&#123;</span><br><span class="line">        model(<span class="string">'Member'</span>)-&gt;save([<span class="string">'status'</span>=&gt;<span class="number">1</span>],[<span class="string">'status'</span>=&gt;<span class="number">-1</span>]);</span><br><span class="line">        $res = model(<span class="string">'Member'</span>)-&gt;getUserList();</span><br><span class="line">        <span class="keyword">return</span> $res;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        model(<span class="string">'Member'</span>)-&gt;save([<span class="string">'status'</span>=&gt;<span class="number">-1</span>],[<span class="string">'status'</span>=&gt;<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 获取信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    $nickname=Input(<span class="string">'nickname'</span>);</span><br><span class="line">    $info = model(<span class="string">'Member'</span>)-&gt;where([<span class="string">'nickname'</span>=&gt;$nickname])-&gt;find();</span><br><span class="line">    <span class="keyword">return</span> $info;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 编辑信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    $info = Input(<span class="string">'info'</span>);</span><br><span class="line">    $uid = Input(<span class="string">'uid'</span>);</span><br><span class="line">    $res = model(<span class="string">'Member'</span>)-&gt;save([<span class="string">'info'</span>=&gt;$info],[<span class="string">'uid'</span>=&gt;$uid]);</span><br><span class="line">    <span class="keyword">if</span>($res)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'编辑成功'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>数据表结构<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="comment">-- 表的结构 `list_member`</span></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`list_member`</span> (</span><br><span class="line">  <span class="string">`uid`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`nickname`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`age`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`status`</span> tinyint(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`info`</span> <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`uid`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=MyISAM  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 AUTO_INCREMENT=<span class="number">1</span> ;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/PHP/" rel="tag"># PHP</a>
-          
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/02/28/shadowsocks/" rel="next" title="shadowsocks">
-                <i class="fa fa-chevron-left"></i> shadowsocks
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/07/wechat/" rel="prev" title="微信APP支付服务端接入(PHP)">
-                微信APP支付服务端接入(PHP) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-    <div class="comments" id="comments">
-      <div id="uyan_frame"></div>
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/36617664.jpg"
-                alt="Tom Linl" />
-            
-              <p class="site-author-name" itemprop="name">Tom Linl</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">12</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">TomLinl&#39;s Blog</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
             </div>
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
         </div>
-      </section>
-
-      
-
-      
-
     </div>
-  </aside>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue+tp5简单列表操作">
+            
+	            Vue+tp5简单列表操作
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
 
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/PHP" title='PHP'>
+                        PHP
+                    </a>
+                
+                    <a href="/tags/Vue" title='Vue'>
+                        Vue
+                    </a>
+                
+            
+        </span>
+    </span>
+    
 
+    
         
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Tom Linl</span>
-
-  
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/03/06</span>
+        </span>
+        
+    
 </div>
 
-<!--<div class="powered-by"> <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv"> 本站访客数:<span id="busuanzi_value_site_uv"></span> </span> </div>-->
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
-
-
-
-
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>459</strong>天之前发表，文中内容可能已经过时。
+            </p>
         
+    </div>
+    
+    <div class="post-body post-content">
+        <p>前段时间，初次使用前端框架Vue和ThinkPHP5.1，于是就简单结合起来，用Vue+axios发送请求，TP5处理接口数据。<br>这里Vue、axios和TP5等等的安装就不多说了，按照官方文档来就ok了。<br><a id="more"></a><br>Vue部分，在main.js中引入axios,qs来帮助处理数据，接口请求的时候会遇到跨域问题</p>
+<pre><code class="javascript">import axios from &#39;axios&#39;
+import Qs from &#39;qs&#39;
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false
+
+var axios_instance = axios.create({
+transformRequest: [function (data) {
+data = Qs.stringify(data);
+return data;
+}],
+//Post请求传递参数时，需要在请求头加上item.ContentType = &quot;application/x-www-form-urlencoded&quot;;
+headers:{&#39;Content-Type&#39;:&#39;application/x-www-form-urlencoded&#39;}
+})
+Vue.prototype.$axios = axios_instance;
+</code></pre>
+<p>PHP部分后端响应头进行设置</p>
+<pre><code class="php">// 指定允许其他域名访问
+header(&quot;Access-Control-Allow-Origin:*&quot;);
+// 响应类型
+header(&quot;Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE&quot;);
+// 响应头设置
+header(&quot;Access-Control-Allow-Headers:x-requested-with,content-type&quot;);
+</code></pre>
+<p>解决了跨域问题后，接下来就能通过接口请求和数据处理了。</p>
+<p>在Vue的/config/dev.env.js 设置 API_HOST</p>
+<pre><code class="javascript">&#39;use strict&#39;
+const merge = require(&#39;webpack-merge&#39;)
+const prodEnv = require(&#39;./prod.env&#39;)
+
+module.exports = merge(prodEnv, {
+NODE_ENV: &#39;&quot;development&quot;&#39;,
+API_HOST:&#39;&quot;http://127.0.0.1/tp5/&quot;&#39;
+})
+</code></pre>
+<p>下面是一个简单的列表，包含简单的增删改查，查看单条数据等功能<br><img src="/2018/03/06/vtpro/list.png"><br>列表部分代码</p>
+<pre><code class="html">&lt;template&gt;
+    &lt;div class=&quot;list-table&quot;&gt;
+        &lt;h1&gt;TODO-LIST&lt;/h1&gt;
+        &lt;form&gt;
+            姓名：&lt;input type=&quot;text&quot; v-model=&quot;nickname&quot;/&gt; {{nickname}}
+            &lt;br/&gt;
+            年龄：&lt;input type=&quot;text&quot; v-model=&quot;age&quot;/&gt;  {{age}}
+            &lt;br/&gt;
+            &lt;span style=&quot;color:red&quot; v-if=&quot;!isAge&quot;&gt;年龄必须是数字&lt;/span&gt;
+            &lt;br/&gt;
+            &lt;br/&gt;
+            &lt;button type=&quot;button&quot; @click=&quot;addList&quot;&gt;添加&lt;/button&gt;
+            &lt;button type=&quot;button&quot; @click=&quot;init()&quot;&gt;重置&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;br/&gt;
+        &lt;table border=&quot;1&quot; cellspacing=&quot;0&quot;&gt;
+            &lt;thead&gt;
+                &lt;th&gt;序号&lt;/th&gt;
+                &lt;th&gt;姓名&lt;/th&gt;
+                &lt;th&gt;年龄&lt;/th&gt;
+                &lt;th&gt;操作&lt;/th&gt;
+            &lt;/thead&gt;
+            &lt;tr v-for=&quot;(data,index) in  list&quot;&gt;
+                &lt;td&gt;{{index+1}}&lt;/td&gt;
+                &lt;td&gt;{{data.nickname}}&lt;/td&gt;
+                &lt;td&gt;{{data.age}}&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button @click=&quot;detail(index)&quot;&gt;查看详情&lt;/button&gt;
+                    &lt;button @click=&quot;delList(index)&quot;&gt;删除&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;text-align: center&quot;&gt;总年龄：&lt;/td&gt;
+                &lt;td&gt;{{sumAge}}&lt;/td&gt;
+                &lt;td&gt;&lt;button @click=&quot;controlList&quot;&gt;清空/还原&lt;/button&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name:&quot;TODOList&quot;
+    data () {
+        return {
+            //姓名
+            nickname:&quot;&quot;,
+            //年龄
+            age:&quot;&quot;,
+            //age是数字
+            isAge:true,
+            list: [],
+        }
+    },
+    created(){
+        this.getList()
+    },
+    methods:{
+    /**
+    * 获取列表数据
+    */
+    getList: function () {
+        let $this = this;
+        this.$axios.get(process.env.API_HOST)
+        .then(function(response){
+        $this.list = response.data;
+        console.log(response.data);
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    },
+    /**
+    * 新增列表数据
+    */
+    addList:function(){
+        let $this = this;
+        if(!this.isAge){
+            return false;
+        }
+        if($this.nickname &amp;&amp; $this.age){
+            $this.$axios.get(process.env.API_HOST + &#39;index/index/addList&#39;,{
+                params: {
+                    nickname: $this.nickname,
+                    age: $this.age
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                $this.list.push({
+                    nickname:response.data.nickname,
+                    age:response.data.age
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    },
+    /**
+    * 删除列表数据
+    * @param index  list键值
+    */
+    delList:function(index){
+        let $this = this;
+        if(confirm(&#39;确定要删除吗&#39;)){
+            if($this.list[index] != undefined){
+                $this.$axios.post(process.env.API_HOST + &#39;index/index/delList&#39;,{
+                    nickname: $this.list[index].nickname
+                    }).then(function (response) {
+                        if(response.data==&#39;操作成功&#39;){
+                            $this.list.splice(index,1);
+                        }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    },
+    /**
+    * 清空或还原列表数据
+    */
+    controlList:function(){
+        if(confirm(&#39;确定要执行此操作吗&#39;)){
+            this.$axios.post(process.env.API_HOST + &#39;index/index/controlList&#39;).then(response=&gt;{
+                if(response.data==&#39;&#39;){
+                    this.list.splice(0,this.list.length);
+                }else{
+                    for (var i in response.data) {
+                        this.list.push({
+                        nickname:response.data[i].nickname,
+                        age:response.data[i].age
+                    });
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });;
+        }
+    },
+    detail:function(index){
+        this.$router.push({path:&#39;/detail&#39;,query: {nickname: this.list[index].nickname}})
+    },
+    /**
+    * 初始化输入
+    */
+    init:function(){
+        this.nickname = &quot;&quot;;
+        this.age = &quot;&quot;;
+        this.isAge = true;
+    },
+    /**
+    * 检测数字
+    * @param theObj       要检测的字符串
+    * @returns {boolean}  是数字放回true  不是返回false
+    */
+    checkNumber:function(theObj) {
+        var reg = /^[0-9]+$/;
+        if(reg.test(theObj)){
+            return true;
+        };
+            return false;
+        }
+    },
+    computed:{
+        sumAge:function(){
+            var ages = 0;
+            for (var i in this.list) {
+                ages += Number(this.list[i].age);
+            }
+            return ages;
+        }
+    },
+    watch:{
+        age:{
+            /**
+            * 监听age的变化
+            * @param newValue
+            * @param oldValue
+            * @returns {boolean}
+            */
+            handler(newValue, oldValue){
+                if(newValue == &quot;&quot;){
+                    this.isAge = true;
+                    return true;
+                }
+                var res = this.checkNumber(newValue);
+                if(res){
+                    this.isAge = true;
+                }else{
+                    this.isAge = false;
+                }
+            }
+        }
+    }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+    .list-table{
+        width: 100%;
+    }
+    .list-table table{
+        margin: 0 auto;
+        width: 500px;
+    }
+    .list-table table th{
+        font-size: 28px;
+    }
+    .list-table table td{
+        padding: 5px 0;
+        font-size: 20px;
+    }
+&lt;/style&gt;
+</code></pre>
+<img src="/2018/03/06/vtpro/detail.png">
+<p>详情部分代码</p>
+<pre><code class="html">&lt;template&gt;
+&lt;div class=&quot;list-table&quot;&gt;
+    &lt;h1&gt;{{msg}}&lt;/h1&gt;
+    &lt;table border=&quot;1&quot; cellspacing=&quot;0&quot;&gt;
+    &lt;thead&gt;
+        &lt;th&gt;用户UID&lt;/th&gt;
+        &lt;th&gt;姓名&lt;/th&gt;
+        &lt;th&gt;年龄&lt;/th&gt;
+    &lt;/thead&gt;
+    &lt;tr&gt;
+        &lt;td&gt;{{uid}}&lt;/td&gt;
+        &lt;td&gt;{{nickname}}&lt;/td&gt;
+        &lt;td&gt;{{age}}&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td colspan=&quot;2&quot;&gt;信息介绍&lt;/td&gt;
+        &lt;td&gt;
+            &lt;button type=&quot;button&quot; @click=&quot;OpenModal&quot;&gt;添加/编辑信息&lt;/button&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td colspan=&quot;3&quot; v-if=&quot;info&quot;&gt;{{info}}&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;router-link to=&quot;/list&quot;&gt;返回&lt;/router-link&gt;
+        &lt;div class=&quot;open-box&quot; v-if=&quot;OpenShow&quot;&gt;
+            &lt;div class=&quot;open-box-content&quot;&gt;
+                &lt;h3&gt;编辑信息&lt;/h3&gt;
+                &lt;p&gt;请输入您的个人信息&lt;/p&gt;
+                &lt;textarea v-model=&quot;info&quot;&gt;{{info}}&lt;/textarea&gt;
+                &lt;div class=&quot;open-box-btn&quot;&gt;
+                    &lt;div class=&quot;open-box-btn-left&quot;&gt;
+                        &lt;button @click=&quot;addinfo&quot;&gt;保存&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;open-box-btn-right&quot;&gt;
+                        &lt;button @click=&quot;ColseModal&quot;&gt;关闭&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &#39;Detail&#39;,
+    data () {
+        return {
+        msg: &#39;信息详情&#39;,
+        uid:&#39;&#39;,
+        //姓名
+        nickname:&quot;&quot;,
+        //年龄
+        age:&quot;&quot;,
+        OpenShow: false,
+        info:&#39;&#39;
+        }
+    },
+    created(){
+        this.getinfo()
+    },
+    methods:{
+    /**
+    * 获取信息
+    */    
+    getinfo: function () {
+        let $this = this;
+        this.$axios.get(process.env.API_HOST+&#39;index/index/getInfo&#39;,{
+        params:{nickname:this.$route.query.nickname}
+    })
+    .then(function(response){
+        $this.nickname = response.data.nickname
+        $this.age = response.data.age
+        $this.uid = response.data.uid
+        $this.info = response.data.info
+        console.log(response.data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    },
+     /**
+     * 编辑信息
+     */  
+    addinfo: function(){
+        this.$axios.post(process.env.API_HOST+&#39;index/index/addInfo&#39;,{
+        info:this.info,
+        uid:this.uid
+    })
+    .then(response=&gt;{
+        alert(response.data)
+        this.OpenShow = !this.OpenShow
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+    },
+    OpenModal() {
+        this.OpenShow = !this.OpenShow
+    },
+    ColseModal() {
+        this.OpenShow = !this.OpenShow
+    }
+    }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+.list-table{
+width: 100%;
+}
+.list-table table{
+margin: 0 auto;
+...
+/*样式部分省略*/
+
+/*弹窗样式*/
+.open-box {
+position: fixed;
+background: rgba(0, 0, 0, 0.4);
+width: 100%;
+height: 100%;
+left: 0;
+top: 0;
+z-index: 100;
+color: #fff;
+...
+/*样式部分省略*/
+&lt;/style&gt;
+</code></pre>
+<p>TP5中相应的代码做数据库处理</p>
+<pre><code class="php">    /**
+    * 获取列表数据
+    */
+    public function index()
+    {
+        $res = model(&#39;Member&#39;)-&gt;getUserList();
+        return $res;
+    }
+
+    /**
+    * 新增列表数据
+    */
+    public function addList(){
+        $nickname=Input(&#39;nickname&#39;);
+        $age=Input(&#39;age&#39;,0,&#39;floatval&#39;);
+        $res = model(&#39;Member&#39;)-&gt;save([
+            &#39;nickname&#39;=&gt;$nickname,
+            &#39;age&#39;=&gt;$age,
+            &#39;status&#39;=&gt;1
+        ]);
+        if($res){
+            $data=[&#39;nickname&#39;=&gt;$nickname,&#39;age&#39;=&gt;$age];
+            $data = json_encode($data);
+            return $data;
+        }
+    }
+
+    /**
+    * 删除列表数据
+    */
+    public function delList(){
+        $nickname=Input(&#39;nickname&#39;);
+        model(&#39;Member&#39;)-&gt;save([&#39;status&#39;=&gt;-1],[&#39;nickname&#39;=&gt;$nickname]);
+        return &#39;操作成功&#39;;
+    }
+
+    /**
+    * 清空还原列表数据
+    */
+    public function controlList(){
+        if(!model(&#39;Member&#39;)-&gt;where([&#39;status&#39;=&gt;1])-&gt;count()){
+            model(&#39;Member&#39;)-&gt;save([&#39;status&#39;=&gt;1],[&#39;status&#39;=&gt;-1]);
+            $res = model(&#39;Member&#39;)-&gt;getUserList();
+            return $res;
+        }else{
+            model(&#39;Member&#39;)-&gt;save([&#39;status&#39;=&gt;-1],[&#39;status&#39;=&gt;1]);
+            return &#39;&#39;;
+        }
+    }
+
+    /**
+    * 获取信息
+    */
+    public function getInfo(){
+        $nickname=Input(&#39;nickname&#39;);
+        $info = model(&#39;Member&#39;)-&gt;where([&#39;nickname&#39;=&gt;$nickname])-&gt;find();
+        return $info;
+    }
+
+    /**
+    * 编辑信息
+    */
+    public function addInfo(){
+        $info = Input(&#39;info&#39;);
+        $uid = Input(&#39;uid&#39;);
+        $res = model(&#39;Member&#39;)-&gt;save([&#39;info&#39;=&gt;$info],[&#39;uid&#39;=&gt;$uid]);
+        if($res){
+            return &#39;编辑成功&#39;;
+        }
+    }
+
+</code></pre>
+<p>数据表结构</p>
+<pre><code class="sql">--
+-- 表的结构 `list_member`
+--
+
+CREATE TABLE IF NOT EXISTS `list_member` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(10) NOT NULL,
+  `age` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `info` varchar(200) NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+</code></pre>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+                【菜鸟一枚】：人为什么非要等成了花痴，才肯笑得无边无际呢 —— 刀刀 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/04/07/wechat/" class="pre-post btn btn-default" title='微信APP支付服务端接入(PHP)'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">微信APP支付服务端接入(PHP)</span>
+        </a>
+    
+    
+        <a href="/2018/02/28/shadowsocks/" class="next-post btn btn-default" title='shadowsocks'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">shadowsocks</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
 
 
-
-
-
-
-
+    <div id="comments">
         
-      </div>
-    </footer>
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
         
-      </div>
-    
+            <p>暂无目录</p>
+        
+    </div>
+</aside>
 
-    
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
 
-  </div>
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+<script>
+    // highlight
+  hljs.initHighlightingOnLoad();
+  $('pre code').each(function(i, block) {
+    //hljs.highlightBlock(block);
+    var lines = $(this).text().split('\n').length - 1;
+    var $numbering = $('<ul/>').addClass('pre-numbering');
+    $(this)
+      .addClass('has-numbering')
+      .parent()
+      .append($numbering);
+    for(i=1;i<=lines;i++){
+      $numbering.append($('<li/>').text(i));
+    }
+  });
 </script>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
     
+</div>
 
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2160732"></script>
-      <!-- UY END -->
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -745,344 +773,8 @@ code.has-numbering {
 
 
 
-  
+<script src="/js/app.js?rev=@@hash"></script>
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
-<script type="text/javascript" src="/js/src/love.js"></script>

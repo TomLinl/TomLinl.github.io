@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="TomLinl&#39;s Blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>MySQL索引 | TomLinl&#39;s Blog</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="TomLinl&#39;s Blog" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+<link rel="stylesheet" href="/css/github.min.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+    <script src="/js/jquery-2.1.1.min.js?rev=@@hash"></script>
+    <script src="/js/highlight.js?rev=@@hash"></script>
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='TomLinl'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> TomLinl&#39;s Blog </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">TomLinl&#39;s Blog</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="MySQL索引">
+            
+	            MySQL索引
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/MySQL" title='MySQL'>
+                        MySQL
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/14</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="MySQL索引对性能的影响"><a href="#MySQL索引对性能的影响" class="headerlink" title="MySQL索引对性能的影响"></a>MySQL索引对性能的影响</h3><blockquote>
+<p>1.大大减少服务器需要扫描的数据量<br>2.帮助服务器避免排序和临时表<br>3.将随机的I/O变为顺序的I/O<br>4.提高查询速度，降低写的速度、占用磁盘</p>
+</blockquote>
+<h3 id="MySQL索引的使用场景"><a href="#MySQL索引的使用场景" class="headerlink" title="MySQL索引的使用场景"></a>MySQL索引的使用场景</h3><blockquote>
+<p>1.对于非常小的表，大部分情况下全表扫描效率更高<br>2.中到大型表，索引非常有效<br>3.特大型表，建立和使用索引的代价将随之增长，可以使用分区技术解决</p>
+</blockquote>
+<h3 id="MySQL索引的类型"><a href="#MySQL索引的类型" class="headerlink" title="MySQL索引的类型"></a>MySQL索引的类型</h3><blockquote>
+<p>索引有很多种类型，都是实现在存储引擎层的:<br>1.普通索引：最基本的索引，没有任何约束限制<br>2.唯一索引：与普通索引类似，但具有唯一约束性<br>3.主键索引：特殊的唯一索引，不允许有空值<br>4.组合索引：将多个列组合在一起创建索引，可以覆盖多个列<br>5.外键索引：只有InnoDB使用，保证数据的一致性完整性和实现级联操作<br>6.全文索引：只有MyISAM使用，只能对英文进行全文检索<br>注意：一个表只有一个主键索引，可以有多个唯一索引<br>主键索引一定是唯一索引，唯一索引不是主键索引<br>主键可以与外键构成参照完整性约束，防止数据不一致</p>
+</blockquote>
+<h3 id="MySQL索引的创建原则"><a href="#MySQL索引的创建原则" class="headerlink" title="MySQL索引的创建原则"></a>MySQL索引的创建原则</h3><blockquote>
+<p>1.最适合索引的列是出现在WHERE子句中的列，或连接子句中的列而不是SELECT<br>关键字后的列<br>2.索引列的基数越大，索引的效果越好<br>3.对字符串进行索引，应该指定一个前缀长度，可以节省大量的索引空间<br>4.根据情况创建复合索引，复合索引可以提高查询效率<br>5.避免创建过多的索引，索引会占用额外的磁盘空间，降低写操作效率<br>6.主键尽可能选择较短的数据类型，可以有效减少索引的磁盘占用提高查询效率</p>
+</blockquote>
+<h3 id="MySQL索引的注意事项"><a href="#MySQL索引的注意事项" class="headerlink" title="MySQL索引的注意事项"></a>MySQL索引的注意事项</h3><blockquote>
+<p>1.复合索引遵循前缀原则<br>2.like查询，%不能在前，可以使用全文索引<br>3.column is null 可以使用索引<br>4.如果mysql估计使用索引比全表扫描慢会放弃使用索引<br>5.如果or前的条件中的列有索引，后面的没有，索引都不会被用到<br>6.列类型是字符串，查询时一定要给值加引号，否则索引失效</p>
+</blockquote>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+                【菜鸟一枚】：人为什么非要等成了花痴，才肯笑得无边无际呢 —— 刀刀 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/06/22/bdtj/" class="next-post btn btn-default" title='百度统计API'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">百度统计API</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL索引对性能的影响"><span class="toc-text">MySQL索引对性能的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL索引的使用场景"><span class="toc-text">MySQL索引的使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL索引的类型"><span class="toc-text">MySQL索引的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL索引的创建原则"><span class="toc-text">MySQL索引的创建原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL索引的注意事项"><span class="toc-text">MySQL索引的注意事项</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+<script>
+    // highlight
+  hljs.initHighlightingOnLoad();
+  $('pre code').each(function(i, block) {
+    //hljs.highlightBlock(block);
+    var lines = $(this).text().split('\n').length - 1;
+    var $numbering = $('<ul/>').addClass('pre-numbering');
+    $(this)
+      .addClass('has-numbering')
+      .parent()
+      .append($numbering);
+    for(i=1;i<=lines;i++){
+      $numbering.append($('<li/>').text(i));
+    }
+  });
+</script>
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
